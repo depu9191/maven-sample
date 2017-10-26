@@ -1,0 +1,19 @@
+node ('master')
+{
+
+stage 'checkout scm'
+checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+ 
+doGenerateSubmoduleConfigurations: false, 
+
+extensions: [[$class: 'RelativeTargetDirectory', 
+
+relativeTargetDir: 'C:/jobs/job2']], 
+
+submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/depu9191/maven-sample.git']]])
+
+stage 'build'
+
+bat 'mvn -f C:/jobs/job2/single-module/pom.xml clean install'
+ 
+}
